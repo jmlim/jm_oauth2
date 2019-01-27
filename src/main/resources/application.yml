@@ -1,0 +1,18 @@
+# my pc 설정.ㅡ,ㅡ
+#spring:
+#  datasource:
+#    url: jdbc:mariadb://localhost:3306/jpa_sample
+#    username: jpa_sample
+#    password: 1111
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/jmlim_test
+    username: jmlim
+    password: jmlim1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+logging:
+  level:
+    org.hibernate.sql: debug
