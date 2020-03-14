@@ -1,16 +1,17 @@
 package io.jmlim.spring.oauth2.demo.users;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/user")
     public List<User> listUser() {
@@ -27,5 +28,4 @@ public class UserController {
         userService.delete(id);
         return "success";
     }
-
 }

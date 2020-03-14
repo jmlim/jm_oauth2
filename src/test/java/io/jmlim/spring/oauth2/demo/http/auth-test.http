@@ -1,0 +1,20 @@
+
+### 토큰 발급 받기
+POST http://localhost:8080/oauth/token
+Authorization: Basic am1saW0tY2xpZW50OmptbGltLXBhc3N3b3Jk
+Content-Type: application/x-www-form-urlencoded
+
+username=jmlim&password=pass&grant_type=password
+
+### 토큰 갱신 하기
+POST http://localhost:8080/oauth/token
+Authorization: Basic am1saW0tY2xpZW50OmptbGltLXBhc3N3b3Jk
+Content-Type: application/x-www-form-urlencoded
+
+username=jmlim&password=pass&grant_type=refresh_token&refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqbWxpbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il0sImF0aSI6IjkyODdmMDc1LTA0MDMtNDAwMS1iNTNhLWMzN2M2ZGE5ZGJhOSIsImV4cCI6MTU4NDIyNDIxNCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjE0NjRiZWVjLTQ1NTQtNGVhMi04YjNhLWI4ZDg3YWVjYWZiNyIsImNsaWVudF9pZCI6ImptbGltLWNsaWVudCJ9.dOg38RxwwQy_OjjiXM6iOw9bf6WNwvs9FSJw79xjDRQ
+
+### 발급받은 토큰으로 권한이 필요한 api 접근하기.
+GET http://localhost:8080/users/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQyMDY0MTgsInVzZXJfbmFtZSI6ImptbGltIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImYxNGY1YWI4LWVmMjMtNDg3Yy05OWI5LTY4ZjM4M2M4MWNlNCIsImNsaWVudF9pZCI6ImptbGltLWNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.dkzgSlCXIj9JFayiXAfamHS8KPWD2IM7oSWxYgK5hXw
+
+###

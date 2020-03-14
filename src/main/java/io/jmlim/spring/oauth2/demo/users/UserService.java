@@ -1,5 +1,7 @@
 package io.jmlim.spring.oauth2.demo.users;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,16 +15,16 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
+    private final PasswordEncoder passwordEncoder;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -39,19 +41,19 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     public void init() {
-        User jmlim = userRepository.findByUsername("jmlim");
-        if (jmlim == null) {
+        userRepository.findByUsername("jmlim").orElseGet(() -> {
             User user = new User();
             user.setUsername("jmlim");
             user.setPassword("pass");
             User newUser = this.save(user);
-            System.out.println(newUser);
-        }
+            return newUser;
+        });
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found."));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities());
     }
 
